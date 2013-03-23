@@ -1,0 +1,37 @@
+3/22
+
+Notes for Adding Association between Pins and Users
+
+From the console we are calling methods on the class. User.all - Class.method - same as User.name
+
+@ sign makes a variable global. If it's not global, the view can't see it. The controller defines variables (and it seems like hashes mostly) and these variables are then used by the view.
+
+(params[:id]) - comes from the URL. Anything after pins/ is the id
+
+"Submit" on the New page takes us to the create action - not sure why.
+
+Add User ID to Pin Model. 
+
+Associations live in the model - has_many -- belongs_to etc -- in the user model has_many :pins
+
+To stop page access unless the user is logged in, "authentication" goes in the controller. This is a method in Devise => before_filter :authenticate_user!, :except => [:index] ### this will allow the /index page to load even if the user is not logged in.
+
+You only want users to be able to create a new Pin with their user ID >> Automatically pass in the user_id attribute when creating a new Pin >> 
+def new
+    @pin = current_user.pins.new
+
+ This needs to go into the Create method as well. ** Also do this for Edit, Update and Destroy - so that users can only perform those actions for their Pins.
+
+ In the Pin model we want to make sure that each Pin has a user id -- validates :user_id, :presence => true -- this is redundant because we automatically set the user ID in the new and create action anyway.
+
+ If we only want to display acions like Edit and Delete to the user that can take those actions, we need to wrap that table data in an if statement in the view.
+ For Instance>> from the -form partial
+
+ <% if current_user == pin.user %>
+	        <td><%= link_to 'Edit', edit_pin_path(pin) %></td>
+	        <td><%= link_to 'Destroy', pin, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+
+
+
+
