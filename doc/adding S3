@@ -1,0 +1,11 @@
+adding S3
+
+Heroku doesn't want to host the images. We can use a tutorial so that amazon can host the files. https://devcenter.heroku.com/articles/paperclip-s3
+
+Add the configuration to the config/environments/production.rb file
+
+Then we need to set the access identifiers (keys) which can be found on the top right after login. You can paste the keys into the code on the page above, or enter them via heroku command if the source code is public.
+
+Set the key, secret key, and then set up a bucket on AWS - need to add that.
+
+Add gem 'aws-sdk' to the gemfile. 
