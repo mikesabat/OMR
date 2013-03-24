@@ -1,0 +1,27 @@
+3/23
+Uploading Images with Paperclip
+
+Paperclip requires ImageMagick and IM is a pain in the ass to install. It's best to install Homebrew and have Homebrew install IM.
+
+Because I'm using ruby 1.8 I had to install paperclip 2.7 rather than 3.0. README http://rubydoc.info/gems/paperclip/2.7.0
+
+rails g paperclip pin image == command to create a migration which ads all of the needed fields so that you can add images to the Pin model.
+
+-Need to add :image to the attr_accessible on the Pin model so that we can edit/add to the :image field
+-also need to add an association saying a Pin has an attached file, which is an image >> has_attached_file :image (similar to belongs_to) "has_attached_file" is a paperclip method.
+
+We want to do a lot of validation on the image - we want to make sure that it's present, certain file types, and under a certain size. There is a pretty significant difference the way validation is done for paperclip 3.0 and 2.7. Here is what is correct so far.
+
+	  validates_attachment_presence :image #:presence => true,
+	  		#not sure if the syntax below is correct http://stackoverflow.com/questions/1751537/paperclip-validates-attachment-content-type-for-mp3-triggered-when-attaching-mp3
+	  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+	  		#again, below may be bad syntax - same link as above
+	  validates_attachment_size :image, :less_than => 5.megabytes
+
+**image is definiely a method on the Pin, I'm not sure where it's defined. 
+
+To display the image, you need to use a ruby tag to tell the page to display the image <%= image_tag @pin.image %> Use this on the show and index pages.
+
+/// Pretty huge problem here, had to reinstall imagemagick. Basically you can set the styles on the model and then call the styles from the model
+  							   
+
