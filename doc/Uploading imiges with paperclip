@@ -23,5 +23,9 @@ We want to do a lot of validation on the image - we want to make sure that it's 
 To display the image, you need to use a ruby tag to tell the page to display the image <%= image_tag @pin.image %> Use this on the show and index pages.
 
 /// Pretty huge problem here, had to reinstall imagemagick. Basically you can set the styles on the model and then call the styles from the model
+
+Pushing to Heroku and you also need to run migrations for the production DB on heroku. 'heroku run rake db:migrate'
+
+
   							   
 

@@ -12,6 +12,6 @@ class Pin < ActiveRecord::Base
   							   #:size => { :less_than => 5.megabytes}
 
   belongs_to :user
-  has_attached_file :image, :styles => {:medium => "100x100>"}
+  has_attached_file :image, :styles => {:medium => "360x240>"}
   #http://stackoverflow.com/questions/7079999/paperclipnotidentifiedbyimagemagickerror-image-is-not-recognized-by-the-ident
 end

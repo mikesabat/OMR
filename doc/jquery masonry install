@@ -1,0 +1,28 @@
+jquery masonry: http://onemonthrails.com/lectures/styling-with-jquery-masonry
+
+Install:
+Download the script/file and drop into vendor/asset/javascripts http://masonry.desandro.com/
+
+Then go into the app/assets/javascripts application.js -- pas in the requirement -- '//= require jquery.masonry.min.js'
+
+Now we don't need the table structure of the index of index page or the _pin partial, so pull out the table row and header tags. Next wrap the index page (the rendering of the partial _pins in a div with id = pins). Wrap the -pins partial in a div with class = box
+
+Next we need to write some JS - actually coffee script. So in App/assets/javascripts/pins.js.coffee
+
+jQuery ->
+	$('#pins').imagesLoaded ->
+		$('#pins').masonry itemSelector: ".box"
+*We get this from the image instructions on the masonry site - http://masonry.desandro.com/demos/images.html >> If the file extension is .coffee then it only accepts coffee script
+
+On the styles.scss.css we styled the images. 
+
+Adding the Add Pin link/button to the top of the page, and adding a bunch of new pins.
+
+The description and actions under the picture look like shit, so we are separating the description into it's own <p> and same with the show and edit. We are giving the description a class so that we can add some CSS styling under the styles.css.scss. 
+
+We made the picture on the index view work as a show link.
+
+Now we want the pictures listed in reverse chronological order. I had this same issue with stocks with the original smash project. This approach is better. In the controller when we pass in Pins >> originally Pin.all , we want to change this up to Pin.order("created_at desc")
+
+
+
