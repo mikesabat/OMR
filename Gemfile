@@ -5,7 +5,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
 gem "paperclip", "~> 2.7"
-gem 'aws-sdk' #>>>> http://stackoverflow.com/questions/5881156/git-bundle-install-error-with-nokogiri-libxms2-is-missing
+gem 'aws-sdk' 
 
 
 
